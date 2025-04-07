@@ -17,7 +17,7 @@ admin.initializeApp({
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:3000', // Your frontend URL
+    origin: 'https://md-url.onrender.com',//'http://localhost:3000', // Your frontend URL
     credentials: true
 }));
 
