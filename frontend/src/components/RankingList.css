@@ -1,0 +1,10 @@
+.bar-button:hover {
+  background-color: #e6b800 !important; /* Darker gold on hover */
+  transform: scale(1.05);
+  transition: 0.3s ease-in-out;
+}
+
+.bar-progress:hover .bar-progress-bar {
+  background-color: #ffcc00 !important; /* Lighter gold on hover */
+  transition: 0.3s ease-in-out;
+}
