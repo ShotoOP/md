@@ -1,0 +1,161 @@
+/* frontend/src/pages/PaymentPage.css */
+.payment-container {
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+.receipt-container {
+  background-color: #1a1a1a;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  text-align: left;
+}
+
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffd700;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.company-info h2 {
+  color: #ffd700;
+  margin-bottom: 5px;
+}
+
+.receipt-info {
+  text-align: right;
+}
+
+.receipt-info p {
+  margin-bottom: 5px;
+}
+
+.receipt-body {
+  margin-bottom: 30px;
+}
+
+.customer-info,
+.order-details {
+  margin-bottom: 25px;
+}
+
+.customer-info h3,
+.order-details h3 {
+  color: #ffd700;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.receipt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.receipt-table th,
+.receipt-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.receipt-table th {
+  background-color: #333;
+  color: #ffd700;
+}
+
+.receipt-table tfoot tr {
+  font-weight: bold;
+}
+
+.receipt-table tfoot td {
+  padding: 10px 12px;
+}
+
+.total-row {
+  font-size: 1.2rem;
+  color: #ffd700;
+  border-top: 2px solid #ffd700;
+}
+
+.receipt-footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #ffd700;
+}
+
+.payment-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-icon {
+  font-size: 3rem;
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+.terms {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* Animation for success state */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.payment-success {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Add these styles to frontend/src/pages/PaymentPage.css */
+
+.promo-code-section {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.promo-code-section h3 {
+  color: #ffd700;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.input-group .btn-outline-warning {
+  color: #ffd700;
+  border-color: #ffd700;
+}
+
+.input-group .btn-outline-warning:hover {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-decoration-line-through {
+  text-decoration: line-through;
+}

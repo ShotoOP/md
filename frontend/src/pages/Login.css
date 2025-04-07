@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Login Card */
+.card {
+  background-color: #1a1a1a;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  animation: fadeIn 0.8s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  padding: 10px; /* Reduced padding */
+}
+.card:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+h3 {
+  color: #ffd700;
+  text-align: center;
+  font-weight: 700; /* Bolder text */
+  font-size: 1.5rem; /* Slightly larger */
+  text-transform: uppercase; /* Optional for styling */
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6),
+    0 0 30px rgba(255, 215, 0, 0.4); /* Glowing effect */
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+/* Optional: Add a glow pulse animation */
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+      0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 25px rgba(255, 215, 0, 0.8),
+      0 0 35px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+      0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+  }
+}
+
+h3:hover {
+  animation: glowPulse 1.5s infinite alternate; /* Glow effect on hover */
+}
+
+/* Buttons */
+.custom-button {
+  background-color: #ffd700;
+  color: #1a1a1a;
+  font-weight: bold;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  padding: 8px; /* Adjusted padding */
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+.custom-button:hover {
+  background-color: #ffc107;
+  color: black;
+  transform: scale(1.05);
+}
+.custom-button:active {
+  transform: scale(0.95);
+}
+
+/* Input Fields */
+.custom-input {
+  background-color: black;
+  color: #fff !important;
+  border: 1px solid #fff;
+  transition: all 0.3s ease-in-out;
+  padding: 8px; /* Reduced padding */
+  border-radius: 5px;
+  width: 100%;
+}
+.custom-input:focus {
+  background-color: black;
+  border-color: #fff;
+  outline: none;
+  box-shadow: 0 0 8px #ffd700;
+  transform: scale(1.02);
+}
+.custom-input::placeholder {
+  color: #fff;
+  opacity: 0.7;
+}
+
+/* Icons in Input Fields */
+.custom-input-icon {
+  background-color: black;
+  color: #fff;
+  border: 1px solid #fff;
+  transition: color 0.3s ease-in-out;
+}
+.custom-input-icon:hover {
+  color: #ffc107;
+}
+
+.password-toggle {
+  background-color: transparent;
+  border-left: 0;
+  cursor: pointer;
+}
+
+/* Password Strength Bar */
+.strength-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 5px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.strength-indicator {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.level-0 {
+  width: 20%;
+  background: red;
+}
+.level-1 {
+  width: 50%;
+  background: orange;
+}
+.level-2 {
+  width: 100%;
+  background: green;
+}
+
+/* Checkbox */
+.custom-checkbox {
+  appearance: none;
+  width: 16px; /* Slightly reduced */
+  height: 16px;
+  background-color: #1a1a1a;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+.custom-checkbox:checked {
+  background-color: #ffd700;
+  border-color: #ffd700;
+  box-shadow: 0 0 5px #ffd700;
+}
+
+/* Checkbox Checkmark Animation */
+@keyframes checkmarkFade {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.custom-checkbox:checked::before {
+  content: "✔";
+  color: black;
+  font-size: 12px; /* Slightly adjusted */
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: checkmarkFade 0.3s ease-in-out;
+}
+
+/* Remember Me Label */
+.remember-me-label {
+  color: #ffc107 !important;
+  transition: color 0.3s ease-in-out;
+}
+.remember-me-label:hover {
+  color: #ffc107;
+}

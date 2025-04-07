@@ -1,0 +1,79 @@
+/* General Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Buttons */
+.custom-btn {
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+}
+
+.custom-btn:hover {
+  background-color: #e6c300 !important;
+  color: #1a1a1a !important;
+  transform: scale(1.05);
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #1a1a1a;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    height: 100vh;
+    width: 250px;
+    z-index: 1050;
+  }
+}
+
+/* Cards */
+.card {
+  background-color: #222;
+  border: 1px solid #ffc107;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Tables */
+.table {
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th {
+  background-color: #ffc107;
+  color: black;
+  padding: 10px;
+}
+
+.table td {
+  padding: 8px;
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+    display: block;
+  }
+}
