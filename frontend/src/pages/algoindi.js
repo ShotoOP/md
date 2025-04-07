@@ -78,7 +78,7 @@ function CustomerInformationForm() {
       };
 
       await axios.post(
-        "http://localhost:8081/api/algoindi-forms",
+        "https://md-1-ga1n.onrender.com/api/algoindi-forms",
         formDataWithUser,
         { withCredentials: true }
       );

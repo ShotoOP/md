@@ -28,7 +28,7 @@ function Plan() {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:8081/api/plan-configurations"
+          "https://md-1-ga1n.onrender.com/api/plan-configurations"
         );
         console.log("Plans fetched successfully:", response.data);
         setPlans(response.data);

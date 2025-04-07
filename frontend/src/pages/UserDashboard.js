@@ -185,7 +185,7 @@ const normalizePlanType = (planType) => {
 //   try {
 //     console.log('Current plan:', plan);
 
-//     const response = await axios.get('http://localhost:8081/api/plan-configurations', {
+//     const response = await axios.get('https://md-1-ga1n.onrender.com/api/plan-configurations', {
 //       withCredentials: true
 //     });
 
@@ -480,7 +480,7 @@ useEffect(() => {
   const checkSession = async () => {
     try {
       // This will refresh the session if needed
-      await api.post("http://localhost:8081/firebase-auth", {
+      await api.post("https://md-1-ga1n.onrender.com/firebase-auth", {
         uid: user.id,
         email: user.email,
         displayName: user.displayName || user.username,
@@ -613,7 +613,7 @@ const handleTicketSubmit = async (e) => {
 
   try {
     await api.post(
-      "http://localhost:8081/api/user/support-tickets",
+      "https://md-1-ga1n.onrender.com/api/user/support-tickets",
       newTicket,
       { 
         withCredentials: true,
@@ -799,7 +799,7 @@ const getDaysSincePurchase = (purchaseDate) => {
   const handleDownloadInvoice = async (invoiceId) => {
     try {
       const response = await api.get(
-        `http://localhost:8081/api/user/invoices/${invoiceId}/download`,
+        `https://md-1-ga1n.onrender.com/api/user/invoices/${invoiceId}/download`,
         {
           withCredentials: true,
           responseType: "blob",
@@ -825,7 +825,7 @@ const getDaysSincePurchase = (purchaseDate) => {
   useEffect(() => {
     const checkPlanExpiry = async () => {
         try {
-            const response = await axios.get('http://localhost:8081/api/user/check-plan-expiry', {
+            const response = await axios.get('https://md-1-ga1n.onrender.com/api/user/check-plan-expiry', {
                 withCredentials: true
             });
             setUserPlans(response.data);
@@ -918,7 +918,7 @@ useEffect(() => {
 
 const fetchPlanExpiryStatus = async () => {
   try {
-    const response = await axios.get('http://localhost:8081/api/plans/expiry-status', {
+    const response = await axios.get('https://md-1-ga1n.onrender.com/api/plans/expiry-status', {
       withCredentials: true
     });
     setPlanExpiryStatus(response.data.reduce((acc, plan) => {
@@ -1047,7 +1047,7 @@ const handleUpgradeClick = async (currentPlan) => {
   try {
     // Fetch available upgrades
     const response = await axios.get(
-      `http://localhost:8081/api/plan-configurations?type=${currentPlan.plan_type}`,
+      `https://md-1-ga1n.onrender.com/api/plan-configurations?type=${currentPlan.plan_type}`,
       {
         headers: {
           Authorization: `Bearer ${user.token}`

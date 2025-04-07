@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:8081";
+  process.env.REACT_APP_API_BASE_URL || "https://md-1-ga1n.onrender.com";
 
 function AdminLogin() {
   const [credentials, setCredentials] = useState({

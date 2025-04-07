@@ -15,7 +15,7 @@ function Header() {
   useEffect(() => {
     const checkAdminStatus = async () => {
       try {
-        await axios.get("http://localhost:8081/admin/stats", {
+        await axios.get("https://md-1-ga1n.onrender.com/admin/stats", {
           withCredentials: true,
         });
         setIsAdmin(true);
@@ -29,7 +29,7 @@ function Header() {
   const handleAdminLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8081/admin/logout",
+        "https://md-1-ga1n.onrender.com/admin/logout",
         {},
         { withCredentials: true }
       );

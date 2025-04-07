@@ -23,7 +23,7 @@ function VerifyEmail() {
       }
       
       try {
-        const response = await axios.get(`http://localhost:8081/verify-email?token=${token}`);
+        const response = await axios.get(`https://md-1-ga1n.onrender.com/verify-email?token=${token}`);
         setStatus('success');
         setMessage('Your email has been verified successfully! You can now log in.');
         

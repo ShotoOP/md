@@ -14,10 +14,10 @@ import {
 import { auth } from "../firebase/config";
 import axios from "axios";
 
-
+// base url - http://localhost:8081
 // Update the api instance configuration
 export const api = axios.create({
-  baseURL: "http://localhost:8081",
+  baseURL: "https://md-1-ga1n.onrender.com",
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
