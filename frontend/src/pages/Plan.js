@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import axios from "axios";
-import { useAuth, api } from "../context/AuthContext";  // Add this import
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const durationMultipliers = {
@@ -27,7 +27,9 @@ function Plan() {
     const fetchPlans = async () => {
       try {
         setLoading(true);
-        const response = await api.get('/api/plan-configurations');
+        const response = await axios.get(
+          "https://md-1-ga1n.onrender.com/api/plan-configurations"
+        );
         console.log("Plans fetched successfully:", response.data);
         setPlans(response.data);
         setError(null);
@@ -36,9 +38,8 @@ function Plan() {
         setError(
           `Failed to load plans: ${err.response?.data?.error || err.message}`
         );
-        setPlans([]); // Set empty array on error
       } finally {
-        setLoading(false);
+        setLoading(false); 
       }
     };
 
@@ -71,32 +72,68 @@ function Plan() {
       (plan) => plan.plan_type === "enterprise" && plan.subcategory === subcategory
     );
 
-    return smartInvestmentPlans.map((plan) => (
-      <div key={plan.id} className="col-md-4 mb-4">
-        <div className="card bg-dark border-warning">
-          <div className="card-header bg-warning text-dark">
-            <h5 className="mb-0">{plan.plan_name}</h5>
-            <small>{plan.subcategory}</small>
-          </div>
-          <div className="card-body">
-            <h3 className="card-title text-center">${plan.base_price}</h3>
-            <ul className="list-unstyled mt-3 mb-4">
-              {plan.features && Object.entries(plan.features).map(([key, value]) => (
-                <li key={key}>
-                  <span className="text-warning">✓</span> {key}: {value}
-                </li>
-              ))}
-            </ul>
-            <button
-              className="btn btn-warning w-100"
-              onClick={() => handlePlanPurchase(plan)}
-            >
-              Select Plan
-            </button>
-          </div>
+    if (smartInvestmentPlans.length === 0) {
+      return (
+        <div className="alert alert-warning text-center">
+          No plans available for this subcategory. Please check back later.
         </div>
+      );
+    }
+
+    return (
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        {smartInvestmentPlans.map((plan) => (
+          <div key={plan.id} className="col-md-4 mb-4">
+            <div
+              className="card pricing-card h-100 text-white hover-effect"
+              style={{
+                backgroundColor: "#1a1a1a",
+                transition: "border-color 0.3s ease",
+                backgroundImage:
+                  "url('https://img.freepik.com/free-vector/abstract-black-gold-luxury-background_361591-4346.jpg?t=st=1742013613~exp=1742017213~hmac=acc2623f9672c7062cc6ac248da6fe6b91d9d39814eb10a677e1bd0dac56fb7c&w=360')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div
+                className="card-header fw-bold text-center"
+                style={{
+                  color: "#ffc107",
+                  padding: "15px",
+                  fontSize: "1.5rem",
+                  borderBottom: "none",
+                }}
+              >
+                {plan.plan_name}
+              </div>
+              <div className="card-body d-flex flex-column text-center">
+                <h1 className="card-title text-white">
+                  ${plan.base_price}
+                  <small className="text-warning">/mo</small>
+                </h1>
+                <ul className="list-unstyled mt-3 mb-4 text-start">
+                  {plan.features &&
+                    Object.entries(plan.features).map(([key, value]) =>
+                      value ? (
+                        <li key={key} className="border-bottom pb-2">
+                          ✔ {value}
+                        </li>
+                      ) : null
+                    )}
+                </ul>
+                <button
+                  type="button"
+                  className="w-100 btn btn-lg btn-outline-warning mt-auto"
+                  onClick={() => handlePlanPurchase(plan)}
+                >
+                  Choose Plan
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    ));
+    );
   };
 
   const handlePlanPurchase = (plan) => {
@@ -109,7 +146,7 @@ function Plan() {
     // Determine plan type and get the actual price
     let planType;
     let planPrice = plan.base_price; // Use base_price directly for enterprise plans
-    
+
     switch (currentCategory) {
       case "basic":
         planType = "Algo Software";
@@ -192,9 +229,8 @@ function Plan() {
 
         <div className="d-flex flex-wrap justify-content-center gap-3 mb-4">
           <button
-            className={`btn fw-bold px-4 py-2 rounded text-white ${
-              currentCategory === "basic" ? "btn-warning" : ""
-            }`}
+            className={`btn fw-bold px-4 py-2 rounded text-white ${currentCategory === "basic" ? "btn-warning" : ""
+              }`}
             style={{
               fontSize: "1.2rem",
               backgroundColor: currentCategory === "basic" ? "" : "#333",
@@ -207,9 +243,8 @@ function Plan() {
             Algo Software
           </button>
           <button
-            className={`btn fw-bold px-4 py-2 rounded text-white ${
-              currentCategory === "premium" ? "btn-warning" : ""
-            }`}
+            className={`btn fw-bold px-4 py-2 rounded text-white ${currentCategory === "premium" ? "btn-warning" : ""
+              }`}
             style={{
               fontSize: "1.2rem",
               backgroundColor: currentCategory === "premium" ? "" : "#333",
@@ -222,9 +257,8 @@ function Plan() {
             Algo Indicator
           </button>
           <button
-            className={`btn fw-bold px-4 py-2 rounded text-white ${
-              currentCategory === "enterprise" ? "btn-warning" : ""
-            }`}
+            className={`btn fw-bold px-4 py-2 rounded text-white ${currentCategory === "enterprise" ? "btn-warning" : ""
+              }`}
             style={{
               fontSize: "1.2rem",
               backgroundColor: currentCategory === "enterprise" ? "" : "#333",
@@ -255,14 +289,12 @@ function Plan() {
         )}
 
         {currentCategory !== "enterprise" ? (
-          // Only show "No plans" message for basic and premium categories when there are no plans
           displayPlans.length === 0 ? (
-            <div className="alert alert-warning">
-              No plans available for this category. Please check back later or try
-              another category.
+            <div className="alert alert-warning text-center">
+              No plans available for this category. Please check back later or try another category.
             </div>
           ) : (
-            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
               {displayPlans.map((plan) => (
                 <div className="col" key={plan.id}>
                   <div
@@ -294,12 +326,13 @@ function Plan() {
                       </h1>
                       <ul className="list-unstyled mt-3 mb-4 text-start">
                         {plan.features &&
-                          Object.entries(plan.features).map(([key, value]) => (
-                            <li key={key} className="border-bottom pb-2">
-                              ✔ {key.charAt(0).toUpperCase() + key.slice(1)}:{" "}
-                              {value}
-                            </li>
-                          ))}
+                          Object.entries(plan.features).map(([key, value]) =>
+                            value ? (
+                              <li key={key} className="border-bottom pb-2">
+                                ✔ {value}
+                              </li>
+                            ) : null
+                          )}
                       </ul>
                       <button
                         type="button"
@@ -315,34 +348,20 @@ function Plan() {
             </div>
           )
         ) : (
-          // Enterprise (Smart Investment) section
-          <div className="container mt-4">
+          <div className="mt-4">
             <div className="d-flex justify-content-center gap-3 mb-4">
               {["One Time", "Profit Split", "Income Flow Builder"].map((subcategory) => (
                 <button
                   key={subcategory}
-                  className={`btn fw-bold px-4 py-2 rounded text-white ${
-                    selectedSubcategory === subcategory ? "btn-warning" : "btn-outline-warning"
-                  }`}
+                  className={`btn fw-bold px-4 py-2 rounded text-white ${selectedSubcategory === subcategory ? "btn-warning" : "btn-outline-warning"
+                    }`}
                   onClick={() => handleSubcategoryChange(subcategory)}
                 >
                   {subcategory}
                 </button>
               ))}
             </div>
-
-            {plans.filter(plan => 
-              plan.plan_type === 'enterprise' && 
-              plan.subcategory === selectedSubcategory
-            ).length === 0 ? (
-              <div className="alert alert-warning">
-                No plans available for this subcategory. Please check back later.
-              </div>
-            ) : (
-              <div className="row">
-                {renderSmartInvestmentPlans(selectedSubcategory)}
-              </div>
-            )}
+            {renderSmartInvestmentPlans(selectedSubcategory)}
           </div>
         )}
       </div>

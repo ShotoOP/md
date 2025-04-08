@@ -5,7 +5,6 @@ import "./Header.css";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { api } from "../context/AuthContext";  // Add this import
 
 function Header() {
   const { user, logout } = useAuth();
@@ -16,19 +15,11 @@ function Header() {
   useEffect(() => {
     const checkAdminStatus = async () => {
       try {
-        const token = localStorage.getItem('authToken');
-        if (!token) {
-          setIsAdmin(false);
-          return;
-        }
-        await api.get('/admin/stats', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+        await axios.get("https://md-1-ga1n.onrender.com/admin/stats", {
+          withCredentials: true,
         });
         setIsAdmin(true);
       } catch (err) {
-        console.error('Admin check failed:', err);
         setIsAdmin(false);
       }
     };
