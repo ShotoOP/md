@@ -97,7 +97,7 @@ function AdminDashboard() {
     const checkAdminAccess = async () => {
       try {
         setLoading(true);
-        await axios.get("https://md-1-ga1n.onrender.com/admin/stats", {
+        await axios.get("https://md-url.onrender.com/admin/stats", {
           withCredentials: true,
         });
 
@@ -125,22 +125,22 @@ function AdminDashboard() {
     try {
       const [statsRes, usersRes, purchasesRes, plansRes, promoCodesRes, withdrawalsRes] =
         await Promise.all([
-          axios.get("https://md-1-ga1n.onrender.com/admin/stats", {
+          axios.get("https://md-url.onrender.com/admin/stats", {
             withCredentials: true,
           }),
-          axios.get("https://md-1-ga1n.onrender.com/admin/users", {
+          axios.get("https://md-url.onrender.com/admin/users", {
             withCredentials: true,
           }),
-          axios.get("https://md-1-ga1n.onrender.com/admin/recent-purchases", {
+          axios.get("https://md-url.onrender.com/admin/recent-purchases", {
             withCredentials: true,
           }),
-          axios.get("https://md-1-ga1n.onrender.com/api/plan-configurations", {
+          axios.get("https://md-url.onrender.com/api/plan-configurations", {
             withCredentials: true,
           }),
-          axios.get("https://md-1-ga1n.onrender.com/admin/promo-codes", {
+          axios.get("https://md-url.onrender.com/admin/promo-codes", {
             withCredentials: true,
           }),
-          axios.get("https://md-1-ga1n.onrender.com/admin/withdrawals", {
+          axios.get("https://md-url.onrender.com/admin/withdrawals", {
             withCredentials: true,
           }),
         ]);
@@ -161,7 +161,7 @@ function AdminDashboard() {
 
   const fetchWalletBalances = async () => {
     try {
-      const response = await axios.get("https://md-1-ga1n.onrender.com/admin/wallet-balances", { withCredentials: true });
+      const response = await axios.get("https://md-url.onrender.com/admin/wallet-balances", { withCredentials: true });
       setWalletBalances(response.data);
     } catch (err) {
       console.error("Error fetching wallet balances:", err);
@@ -193,20 +193,20 @@ function AdminDashboard() {
   const handleInputChange = (e, isFeature = false, featureKey = null) => {
     const { name, value } = e.target;
     if (isFeature) {
-        setNewPlan(prev => ({
-            ...prev,
-            features: {
-                ...prev.features,
-                [featureKey]: value,
-            },
-        }));
+      setNewPlan(prev => ({
+        ...prev,
+        features: {
+          ...prev.features,
+          [featureKey]: value,
+        },
+      }));
     } else {
-        setNewPlan(prev => ({
-            ...prev,
-            [name]: name === 'base_price' ? Number(value) : value,
-            // Reset subcategory if changing plan type away from enterprise
-            ...(name === 'plan_type' && value !== 'enterprise' ? { subcategory: null } : {}),
-        }));
+      setNewPlan(prev => ({
+        ...prev,
+        [name]: name === 'base_price' ? Number(value) : value,
+        // Reset subcategory if changing plan type away from enterprise
+        ...(name === 'plan_type' && value !== 'enterprise' ? { subcategory: null } : {}),
+      }));
     }
   };
 
@@ -231,7 +231,7 @@ function AdminDashboard() {
   const handleSaveEdit = async () => {
     try {
       await axios.put(
-        `https://md-1-ga1n.onrender.com/admin/plans/${editingPlan.id}`,
+        `https://md-url.onrender.com/admin/plans/${editingPlan.id}`,
         {
           plan_name: editingPlan.plan_name,
           base_price: parseFloat(editingPlan.base_price),
@@ -253,7 +253,7 @@ function AdminDashboard() {
 
   const handleAddPlan = async () => {
     try {
-      await axios.post("https://md-1-ga1n.onrender.com/admin/plans", newPlan, {
+      await axios.post("https://md-url.onrender.com/admin/plans", newPlan, {
         withCredentials: true,
       });
 
@@ -284,7 +284,7 @@ function AdminDashboard() {
   const handleDeletePlan = async (id) => {
     if (window.confirm("Are you sure you want to delete this plan?")) {
       try {
-        await axios.delete(`https://md-1-ga1n.onrender.com/admin/plans/${id}`, {
+        await axios.delete(`https://md-url.onrender.com/admin/plans/${id}`, {
           withCredentials: true,
         });
 
@@ -300,7 +300,7 @@ function AdminDashboard() {
   const handleAddPromoCode = async () => {
     try {
       await axios.post(
-        "https://md-1-ga1n.onrender.com/admin/promo-codes",
+        "https://md-url.onrender.com/admin/promo-codes",
         newPromoCode,
         {
           withCredentials: true,
@@ -321,7 +321,7 @@ function AdminDashboard() {
     } catch (err) {
       setError(
         "Failed to add promo code. " +
-          (err.response?.data?.error || err.message)
+        (err.response?.data?.error || err.message)
       );
     }
   };
@@ -359,7 +359,7 @@ function AdminDashboard() {
   const handleSavePromoCodeEdit = async () => {
     try {
       await axios.put(
-        `https://md-1-ga1n.onrender.com/admin/promo-codes/${editingPromoCode.id}`,
+        `https://md-url.onrender.com/admin/promo-codes/${editingPromoCode.id}`,
         editingPromoCode,
         {
           withCredentials: true,
@@ -371,7 +371,7 @@ function AdminDashboard() {
     } catch (err) {
       setError(
         "Failed to update promo code. " +
-          (err.response?.data?.error || err.message)
+        (err.response?.data?.error || err.message)
       );
     }
   };
@@ -379,7 +379,7 @@ function AdminDashboard() {
   const handleDeletePromoCode = async (id) => {
     if (window.confirm("Are you sure you want to delete this promo code?")) {
       try {
-        await axios.delete(`https://md-1-ga1n.onrender.com/admin/promo-codes/${id}`, {
+        await axios.delete(`https://md-url.onrender.com/admin/promo-codes/${id}`, {
           withCredentials: true,
         });
 
@@ -387,7 +387,7 @@ function AdminDashboard() {
       } catch (err) {
         setError(
           "Failed to delete promo code. " +
-            (err.response?.data?.error || err.message)
+          (err.response?.data?.error || err.message)
         );
       }
     }
@@ -396,7 +396,7 @@ function AdminDashboard() {
   const handleTogglePromoCodeStatus = async (promoCode) => {
     try {
       await axios.put(
-        `https://md-1-ga1n.onrender.com/admin/promo-codes/${promoCode.id}`,
+        `https://md-url.onrender.com/admin/promo-codes/${promoCode.id}`,
         {
           ...promoCode,
           is_active: !promoCode.is_active,
@@ -410,7 +410,7 @@ function AdminDashboard() {
     } catch (err) {
       setError(
         "Failed to update promo code status. " +
-          (err.response?.data?.error || err.message)
+        (err.response?.data?.error || err.message)
       );
     }
   };
@@ -449,42 +449,42 @@ function AdminDashboard() {
 
   const handleUpdatePlanStatus = async (planId, planType) => {
     try {
-        const response = await axios.post(
-            `https://md-1-ga1n.onrender.com/admin/collect-plan/${planId}`,
-            { planType },
-            { withCredentials: true }
-        );
-        
-        // Show success message
-        alert('Plan marked as collected successfully');
-        
-        // Refresh the purchase list
-        fetchDashboardData();
+      const response = await axios.post(
+        `https://md-url.onrender.com/admin/collect-plan/${planId}`,
+        { planType },
+        { withCredentials: true }
+      );
+
+      // Show success message
+      alert('Plan marked as collected successfully');
+
+      // Refresh the purchase list
+      fetchDashboardData();
     } catch (err) {
-        console.error('Error updating plan status:', err);
-        alert(err.response?.data?.error || 'Failed to update plan status');
+      console.error('Error updating plan status:', err);
+      alert(err.response?.data?.error || 'Failed to update plan status');
     }
-}; 
+  };
 
-const handleWithdrawalAction = async (withdrawalId, action) => {
-  if (!window.confirm(`Are you sure you want to ${action} this withdrawal request?`)) {
-    return;
-  }
+  const handleWithdrawalAction = async (withdrawalId, action) => {
+    if (!window.confirm(`Are you sure you want to ${action} this withdrawal request?`)) {
+      return;
+    }
 
-  try {
-    await api.post(`/admin/withdrawals/${withdrawalId}/${action}`);
-    
-    // Show success message
-    alert(`Withdrawal ${action}ed successfully${action === 'reject' ? '. Amount has been restored to user\'s wallet.' : ''}`);
-    
-    // Refresh withdrawal requests
-    const response = await api.get('/admin/withdrawals');
-    setWithdrawalRequests(response.data);
-  } catch (err) {
-    console.error(`Error ${action}ing withdrawal:`, err);
-    alert(`Failed to ${action} withdrawal. Please try again.`);
-  }
-};
+    try {
+      await api.post(`/admin/withdrawals/${withdrawalId}/${action}`);
+
+      // Show success message
+      alert(`Withdrawal ${action}ed successfully${action === 'reject' ? '. Amount has been restored to user\'s wallet.' : ''}`);
+
+      // Refresh withdrawal requests
+      const response = await api.get('/admin/withdrawals');
+      setWithdrawalRequests(response.data);
+    } catch (err) {
+      console.error(`Error ${action}ing withdrawal:`, err);
+      alert(`Failed to ${action} withdrawal. Please try again.`);
+    }
+  };
 
   const handlePlanCollection = async (planId, planType) => {
     try {
@@ -493,14 +493,14 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
       }
 
       const response = await axios.post(
-        `https://md-1-ga1n.onrender.com/admin/plans/${planId}/collect`,
+        `https://md-url.onrender.com/admin/plans/${planId}/collect`,
         { planType },
         { withCredentials: true }
       );
 
       // Show success message
       alert('Plan collection status updated successfully');
-      
+
       // Refresh the purchase list to show updated status
       fetchDashboardData();
 
@@ -513,14 +513,14 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
   const handleDurationPromoSubmit = async (e) => {
     e.preventDefault();
     const isEditing = durationPromoForm.id != null;
-    
+
     try {
-      const endpoint = isEditing 
-        ? `https://md-1-ga1n.onrender.com/admin/duration-promo-codes/${durationPromoForm.id}`
-        : 'https://md-1-ga1n.onrender.com/admin/duration-promo-codes';
-        
+      const endpoint = isEditing
+        ? `https://md-url.onrender.com/admin/duration-promo-codes/${durationPromoForm.id}`
+        : 'https://md-url.onrender.com/admin/duration-promo-codes';
+
       const method = isEditing ? 'put' : 'post';
-  
+
       const response = await axios[method](
         endpoint,
         {
@@ -529,7 +529,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
         },
         { withCredentials: true }
       );
-  
+
       if (response.status === 201 || response.status === 200) {
         alert(`Duration promo code ${isEditing ? 'updated' : 'created'} successfully!`);
         setDurationPromoForm({
@@ -546,16 +546,16 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
       alert('Error with promo code: ' + (error.response?.data?.error || error.message));
     }
   };
-  
+
   const handleEditDurationPromo = async (promo) => {
     try {
       // Parse JSON strings if they exist, otherwise use default values
-      const subcategory = typeof promo.subcategory === 'string' ? 
-        JSON.parse(promo.subcategory) : 
+      const subcategory = typeof promo.subcategory === 'string' ?
+        JSON.parse(promo.subcategory) :
         promo.subcategory || ['One Time'];
-      
-      const applicable_plan_ids = typeof promo.applicable_plan_ids === 'string' ? 
-        JSON.parse(promo.applicable_plan_ids) : 
+
+      const applicable_plan_ids = typeof promo.applicable_plan_ids === 'string' ?
+        JSON.parse(promo.applicable_plan_ids) :
         promo.applicable_plan_ids || [];
 
       setDurationPromoForm({
@@ -567,7 +567,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
         subcategory: subcategory,
         applicable_plan_ids: applicable_plan_ids
       });
-  
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error('Error setting up promo edit:', error);
@@ -578,10 +578,10 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
   const fetchDurationPromos = async () => {
     try {
       console.log('Fetching duration promo codes...');
-      const response = await axios.get('https://md-1-ga1n.onrender.com/admin/duration-promo-codes', {
+      const response = await axios.get('https://md-url.onrender.com/admin/duration-promo-codes', {
         withCredentials: true
       });
-      
+
       if (response.data) {
         console.log('Duration promos fetched:', response.data);
         setDurationPromos(response.data);
@@ -606,12 +606,12 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
     if (!window.confirm('Are you sure you want to delete this duration promo code?')) {
       return;
     }
-  
+
     try {
-      await axios.delete(`https://md-1-ga1n.onrender.com/admin/duration-promo-codes/${promoId}`, {
+      await axios.delete(`https://md-url.onrender.com/admin/duration-promo-codes/${promoId}`, {
         withCredentials: true
       });
-      
+
       alert('Duration promo code deleted successfully');
       fetchDurationPromos(); // Refresh the list
     } catch (error) {
@@ -623,7 +623,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
   const handleToggleDurationPromoStatus = async (promoId) => {
     try {
       const response = await axios.put(
-        `https://md-1-ga1n.onrender.com/admin/duration-promo-codes/${promoId}/toggle-status`,
+        `https://md-url.onrender.com/admin/duration-promo-codes/${promoId}/toggle-status`,
         {},
         { withCredentials: true }
       );
@@ -637,7 +637,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
               : promo
           )
         );
-        
+
         // Show success message
         alert('Status updated successfully');
       }
@@ -648,10 +648,10 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
   };
 
   const renderDurationPromoSection = () => (
-    <div className="card bg-dark text-white mb-4">
-      <div className="card-header d-flex justify-content-between align-items-center">
-        <h5 className="mb-0">
-          <FaClock className="me-2" />
+    <div className="bg-dark text-white mb-4">
+      <div className="mb-2 header bg-warning d-flex justify-content-between align-items-center">
+        <h5 className="p-2 text-dark">
+          <FaClock className="me-2 text-dark" />
           Smart Investment Duration Promo Codes
         </h5>
       </div>
@@ -659,7 +659,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
         <form onSubmit={handleDurationPromoSubmit} className="mb-4">
           <div className="row g-3">
             <div className="col-md-6">
-              <label className="form-label">Promo Code</label>
+              <label className="form-label text-white">Promo Code</label>
               <input
                 type="text"
                 className="form-control"
@@ -673,7 +673,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Duration Reduction (Days)</label>
+              <label className="form-label text-white">Duration Reduction (Days)</label>
               <input
                 type="number"
                 className="form-control"
@@ -689,7 +689,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Valid From</label>
+              <label className="form-label text-white">Valid From</label>
               <input
                 type="date"
                 className="form-control"
@@ -702,7 +702,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">Valid Until</label>
+              <label className="form-label text-white">Valid Until</label>
               <input
                 type="date"
                 className="form-control"
@@ -716,18 +716,18 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
           </div>
 
           <div className="mt-4">
-            <label className="form-label">Select Plans</label>
+            <label className="form-label text-white">Select Plans</label>
             <div className="row g-3">
               {['One Time', 'Profit Split', 'Income Flow Builder'].map(category => (
                 <div key={category} className="col-md-4">
-                  <div className="card bg-dark border-warning">
+                  <div className="p-4 bg-dark border-warning" style={{ border: "2px solid #ffc107", borderRadius: "10px"  }}>
                     <div className="card-header">
-                      <h6 className="mb-0">{category}</h6>
+                      <h6 className="mb-0 text-white">{category}</h6>
                     </div>
                     <div className="card-body">
                       {plans
-                        .filter(plan => 
-                          plan.plan_type === 'enterprise' && 
+                        .filter(plan =>
+                          plan.plan_type === 'enterprise' &&
                           plan.subcategory === category
                         )
                         .map(plan => (
@@ -748,7 +748,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                 });
                               }}
                             />
-                            <label className="form-check-label" htmlFor={`plan-${plan.id}`}>
+                            <label className="form-check-label text-white" htmlFor={`plan-${plan.id}`}>
                               {plan.plan_name} - {plan.duration}
                             </label>
                           </div>
@@ -861,7 +861,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
 
   if (loading) {
     return (
-      <div>
+      <div className="bg-dark">
         <div className="container mt-5 pt-5 text-center">
           <div className="spinner-border text-warning" role="status">
             <span className="visually-hidden">Loading...</span>
@@ -873,8 +873,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
   }
 
   return (
-    <div className="AdminDashboard">
-      <div className="container-fluid mt-5 pt-4">
+    <div className="AdminDashboard bg-dark vh-100">
+      <div className="container-fluid pt-4 bg-dark">
         <button
           className="btn btn-warning d-md-none mb-3 position-fixed start-0 ms-2 z-index-1030"
           onClick={toggleSidebar}
@@ -885,18 +885,16 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
 
         <div className="row">
           <div
-            className={`sidebar col-md-3 col-lg-2 bg-dark d-${
-              sidebarOpen ? "block" : "none"
-            } d-md-block position-fixed h-100 border-end border-3 border-warning shadow-lg`}
+            className={`sidebar col-md-3 col-lg-2 bg-dark d-${sidebarOpen ? "block" : "none"
+              } d-md-block position-fixed h-100 border-end border-3 border-warning shadow-lg`}
             style={{ zIndex: 1029, overflowY: "auto", top: "56px" }}
           >
             <div className="position-sticky pt-3">
               <ul className="nav flex-column">
                 <li className="nav-item">
                   <button
-                    className={`nav-link btn ${
-                      activeTab === "dashboard" ? "text-warning" : "text-white"
-                    }`}
+                    className={`nav-link btn border-0 shadow-none ${activeTab === "dashboard" ? "text-warning" : "text-white"
+                      }`}
                     onClick={() => handleTabClick("dashboard")}
                   >
                     <FaChartLine className="me-2" />
@@ -905,9 +903,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </li>
                 <li className="nav-item">
                   <button
-                    className={`nav-link btn ${
-                      activeTab === "users" ? "text-warning" : "text-white"
-                    }`}
+                    className={`nav-link btn shadow-none ${activeTab === "users" ? "text-warning" : "text-white"
+                      }`}
                     onClick={() => handleTabClick("users")}
                   >
                     <FaUsers className="me-2" />
@@ -916,9 +913,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </li>
                 <li className="nav-item">
                   <button
-                    className={`nav-link btn ${
-                      activeTab === "purchases" ? "text-warning" : "text-white"
-                    }`}
+                    className={`nav-link btn shadow-none ${activeTab === "purchases" ? "text-warning" : "text-white"
+                      }`}
                     onClick={() => handleTabClick("purchases")}
                   >
                     <FaShoppingCart className="me-2" />
@@ -927,9 +923,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </li>
                 <li className="nav-item">
                   <button
-                    className={`nav-link btn ${
-                      activeTab === "plans" ? "text-warning" : "text-white"
-                    }`}
+                    className={`nav-link btn shadow-none ${activeTab === "plans" ? "text-warning" : "text-white"
+                      }`}
                     onClick={() => handleTabClick("plans")}
                   >
                     <FaEdit className="me-2" />
@@ -938,9 +933,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </li>
                 <li className="nav-item">
                   <button
-                    className={`nav-link btn ${
-                      activeTab === "Promo Code" ? "text-warning" : "text-white"
-                    }`}
+                    className={`nav-link btn shadow-none ${activeTab === "Promo Code" ? "text-warning" : "text-white"
+                      }`}
                     onClick={() => handleTabClick("Promo Code")}
                   >
                     <FaTag className="me-2" />
@@ -949,9 +943,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </li>
                 <li className="nav-item">
                   <button
-                    className={`nav-link btn ${
-                      activeTab === "wallets" ? "text-warning" : "text-white"
-                    }`}
+                    className={`nav-link btn shadow-none ${activeTab === "wallets" ? "text-warning" : "text-white"
+                      }`}
                     onClick={() => handleTabClick("wallets")}
                   >
                     <FaWallet className="me-2" />
@@ -960,7 +953,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </li>
                 <li className="nav-item">
                   <button
-                    className={`nav-link btn ${activeTab === "withdrawals" ? "text-warning" : "text-white"}`}
+                    className={`nav-link btn shadow-none ${activeTab === "withdrawals" ? "text-warning" : "text-white"}`}
                     onClick={() => handleTabClick("withdrawals")}
                   >
                     <FaMoneyBill className="me-2" />
@@ -969,11 +962,11 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </li>
                 <li className="nav-item mt-5">
                   <button
-                    className="nav-link btn text-white"
+                    className="nav-link btn shadow-none text-white"
                     onClick={async () => {
                       try {
                         await axios.post(
-                          "https://md-1-ga1n.onrender.com/admin/logout",
+                          "https://md-url.onrender.com/admin/logout",
                           {},
                           { withCredentials: true }
                         );
@@ -992,9 +985,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
           </div>
 
           <main
-            className={`col-12 ${
-              sidebarOpen ? "ps-0" : ""
-            } col-md-9 col-lg-10 ms-auto px-md-4 bg-dark text-white`}
+            className={`col-12 ${sidebarOpen ? "ps-0" : ""
+              } col-md-9 col-lg-10 ms-auto px-md-4 bg-dark text-white`}
           >
             {error && (
               <div className="alert alert-danger mt-3" role="alert">
@@ -1003,7 +995,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
             )}
 
             {activeTab === "dashboard" && (
-              <div>
+              <div className="bg-dark">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-warning">
                   <h1 className="h2 text-warning">Admin Dashboard</h1>
                   <button
@@ -1084,11 +1076,10 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                   <div
                                     className="progress-bar bg-warning"
                                     style={{
-                                      width: `${
-                                        (planType.count /
-                                          (stats.totalPlans || 1)) *
+                                      width: `${(planType.count /
+                                        (stats.totalPlans || 1)) *
                                         100
-                                      }%`,
+                                        }%`,
                                     }}
                                   ></div>
                                 </div>
@@ -1308,14 +1299,14 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </div>
 
                 {showAddPromoForm && (
-                  <div className="card bg-dark border-warning mb-4">
-                    <div className="card-header bg-warning text-dark">
-                      <h5 className="mb-0">Add New Promo Code</h5>
+                  <div className="bg-dark border-warning mb-4">
+                    <div className="mb-2 header bg-warning text-dark">
+                      <h5 className="p-2">Add New Promo Code</h5>
                     </div>
                     <div className="card-body">
                       <div className="row">
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Promo Code</label>
+                          <label className="form-label text-white">Promo Code</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -1332,7 +1323,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">
+                          <label className="form-label text-white">
                             Discount Percentage
                           </label>
                           <input
@@ -1352,7 +1343,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Valid From</label>
+                          <label className="form-label text-white">Valid From</label>
                           <input
                             type="date"
                             className="form-control bg-dark text-white border-warning"
@@ -1368,7 +1359,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">
+                          <label className="form-label text-white">
                             Valid Until (Optional)
                           </label>
                           <input
@@ -1387,7 +1378,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                       </div>
 
                       <div className="row mt-4">
-                        <div className="col-md-6 mb-4">
+                        <div className="col-md-5 mb-4">
                           <div className="card bg-dark border-warning h-100">
                             <div className="card-header bg-primary text-white">
                               <div className="form-check form-switch">
@@ -1418,7 +1409,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                               {newPromoCode.applies_to_algo_software ? (
                                 <>
                                   <div className="mb-3">
-                                    <label className="form-label">
+                                    <label className="form-label text-white">
                                       Select Plans
                                     </label>
                                     <select
@@ -1475,7 +1466,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           </option>
                                         ))}
                                     </select>
-                                    <small className="text-muted d-block">
+                                    <small className="text-white d-block">
                                       Hold Ctrl/Cmd to select multiple plans
                                     </small>
                                   </div>
@@ -1485,7 +1476,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                       Selected Algo Software Plans:
                                     </h6>
                                     {newPromoCode.applicable_plan_ids.length >
-                                    0 ? (
+                                      0 ? (
                                       <div className="d-flex flex-wrap gap-2 mt-2">
                                         {newPromoCode.applicable_plan_ids
                                           .map((id) =>
@@ -1519,7 +1510,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           ))}
                                       </div>
                                     ) : (
-                                      <p className="text-muted small">
+                                      <p className="text-white small">
                                         No plans selected. Promo code will apply
                                         to all Algo Software plans.
                                       </p>
@@ -1527,7 +1518,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                   </div>
                                 </>
                               ) : (
-                                <div className="text-center text-muted py-4">
+                                <div className="text-center text-white py-4">
                                   Enable Algo Software Plans to select specific
                                   plans
                                 </div>
@@ -1536,7 +1527,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                           </div>
                         </div>
 
-                        <div className="col-md-6 mb-4">
+                        <div className="col-md-5 mb-4">
                           <div className="card bg-dark border-warning h-100">
                             <div className="card-header bg-info text-white">
                               <div className="form-check form-switch">
@@ -1564,7 +1555,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                               {newPromoCode.applies_to_indicators ? (
                                 <>
                                   <div className="mb-3">
-                                    <label className="form-label">
+                                    <label className="form-label text-white">
                                       Select Plans
                                     </label>
                                     <select
@@ -1622,7 +1613,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           </option>
                                         ))}
                                     </select>
-                                    <small className="text-muted d-block">
+                                    <small className="text-white d-block">
                                       Hold Ctrl/Cmd to select multiple plans
                                     </small>
                                   </div>
@@ -1632,7 +1623,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                       Selected Indicator Plans:
                                     </h6>
                                     {newPromoCode.applicable_plan_ids.length >
-                                    0 ? (
+                                      0 ? (
                                       <div className="d-flex flex-wrap gap-2 mt-2">
                                         {newPromoCode.applicable_plan_ids
                                           .map((id) =>
@@ -1667,7 +1658,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           ))}
                                       </div>
                                     ) : (
-                                      <p className="text-muted small">
+                                      <p className="text-white small">
                                         No plans selected. Promo code will apply
                                         to all Indicator plans.
                                       </p>
@@ -1675,7 +1666,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                   </div>
                                 </>
                               ) : (
-                                <div className="text-center text-muted py-4">
+                                <div className="text-center text-white py-4">
                                   Enable Indicator Plans to select specific
                                   plans
                                 </div>
@@ -1706,7 +1697,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                     <div className="card-body">
                       <div className="row">
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Promo Code</label>
+                          <label className="form-label text-white">Promo Code</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -1722,7 +1713,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">
+                          <label className="form-label text-white">
                             Discount Percentage
                           </label>
                           <input
@@ -1742,7 +1733,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Status</label>
+                          <label className="form-label text-white">Status</label>
                           <div className="form-check form-switch mt-2">
                             <input
                               className="form-check-input"
@@ -1764,7 +1755,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Valid From</label>
+                          <label className="form-label text-white">Valid From</label>
                           <input
                             type="date"
                             className="form-control bg-dark text-white border-warning"
@@ -1780,7 +1771,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">
+                          <label className="form-label text-white">
                             Valid Until (Optional)
                           </label>
                           <input
@@ -1830,7 +1821,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                               {editingPromoCode.applies_to_algo_software ? (
                                 <>
                                   <div className="mb-3">
-                                    <label className="form-label">
+                                    <label className="form-label text-white">
                                       Select Plans
                                     </label>
                                     <select
@@ -1887,7 +1878,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           </option>
                                         ))}
                                     </select>
-                                    <small className="text-muted d-block">
+                                    <small className="text-white d-block">
                                       Hold Ctrl/Cmd to select multiple plans
                                     </small>
                                   </div>
@@ -1931,7 +1922,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           ))}
                                       </div>
                                     ) : (
-                                      <p className="text-muted small">
+                                      <p className="text-white small">
                                         No plans selected. Promo code will apply
                                         to all Algo Software plans.
                                       </p>
@@ -1939,7 +1930,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                   </div>
                                 </>
                               ) : (
-                                <div className="text-center text-muted py-4">
+                                <div className="text-center text-white py-4">
                                   Enable Algo Software Plans to select specific
                                   plans
                                 </div>
@@ -1978,7 +1969,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                               {editingPromoCode.applies_to_indicators ? (
                                 <>
                                   <div className="mb-3">
-                                    <label className="form-label">
+                                    <label className="form-label text-white">
                                       Select Plans
                                     </label>
                                     <select
@@ -2036,7 +2027,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           </option>
                                         ))}
                                     </select>
-                                    <small className="text-muted d-block">
+                                    <small className="text-white d-block">
                                       Hold Ctrl/Cmd to select multiple plans
                                     </small>
                                   </div>
@@ -2081,7 +2072,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                           ))}
                                       </div>
                                     ) : (
-                                      <p className="text-muted small">
+                                      <p className="text-white small">
                                         No plans selected. Promo code will apply
                                         to all Indicator plans.
                                       </p>
@@ -2089,7 +2080,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                   </div>
                                 </>
                               ) : (
-                                <div className="text-center text-muted py-4">
+                                <div className="text-center text-white py-4">
                                   Enable Indicator Plans to select specific
                                   plans
                                 </div>
@@ -2142,8 +2133,8 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                             -
                             {promoCode.valid_until
                               ? new Date(
-                                  promoCode.valid_until
-                                ).toLocaleDateString()
+                                promoCode.valid_until
+                              ).toLocaleDateString()
                               : " No expiry"}
                           </td>
                           <td>
@@ -2232,14 +2223,14 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                 </div>
 
                 {showAddForm && (
-                  <div className="card bg-dark border-warning mb-4">
-                    <div className="card-header bg-warning text-dark">
-                      <h5 className="mb-0">Add New Plan</h5>
+                  <div className="bg-dark border-warning mb-4">
+                    <div className="header bg-warning text-dark">
+                      <h5 className="mb-2 p-2">Add New Plan</h5>
                     </div>
                     <div className="card-body">
                       <div className="row">
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Plan Type</label>
+                          <label className="form-label text-white">Plan Type</label>
                           <select
                             className="form-select bg-dark text-white border-warning"
                             name="plan_type"
@@ -2255,7 +2246,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         {/* Only show subcategory dropdown for enterprise (Smart Investment) plans */}
                         {newPlan.plan_type === "enterprise" && (
                           <div className="col-md-4 mb-3">
-                            <label className="form-label">Subcategory</label>
+                            <label className="form-label text-white">Subcategory</label>
                             <select
                               className="form-select bg-dark text-white border-warning"
                               name="subcategory"
@@ -2271,7 +2262,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
 
                         {/* Rest of the form fields */}
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Plan Name</label>
+                          <label className="form-label text-white">Plan Name</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2282,7 +2273,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Base Price</label>
+                          <label className="form-label text-white">Base Price</label>
                           <input
                             type="number"
                             min="0"
@@ -2295,7 +2286,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-4 mb-3">
-                          <label className="form-label">Duration</label>
+                          <label className="form-label text-white">Duration</label>
                           {newPlan.plan_type === 'enterprise' ? (
                             <select
                               className="form-select bg-dark text-white border-warning"
@@ -2311,7 +2302,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                             <select
                               className="form-select bg-dark text-white border-warning"
                               name="duration"
-                              value={newPlan.duration} 
+                              value={newPlan.duration}
                               onChange={handleInputChange}
                             >
                               <option value="7 Days">7 Days</option>
@@ -2328,7 +2319,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                       <h6 className="mt-3 text-warning">Features</h6>
                       <div className="row">
                         <div className="col-md-3 mb-3">
-                          <label className="form-label">Users</label>
+                          <label className="form-label text-white">Users</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2340,7 +2331,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-3                         mb-3">
-                          <label className="form-label">Storage</label>
+                          <label className="form-label text-white">Storage</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2352,7 +2343,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-3 mb-3">
-                          <label className="form-label">Support</label>
+                          <label className="form-label text-white">Support</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2364,7 +2355,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-3 mb-3">
-                          <label className="form-label">Encryption</label>
+                          <label className="form-label text-white">Encryption</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2376,7 +2367,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-3 mb-3">
-                          <label className="form-label">Backup</label>
+                          <label className="form-label text-white">Backup</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2388,7 +2379,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-3 mb-3">
-                          <label className="form-label">API Access</label>
+                          <label className="form-label text-white">API Access</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2400,7 +2391,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-3 mb-3">
-                          <label className="form-label">Language Support</label>
+                          <label className="form-label text-white">Language Support</label>
                           <input
                             type="text"
                             className="form-control bg-dark text-white border-warning"
@@ -2412,7 +2403,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         </div>
 
                         <div className="col-md-3 mb-3">
-                          <label className="form-label">
+                          <label className="form-label text-white">
                             Dedicated Manager
                           </label>
                           <input
@@ -2588,7 +2579,7 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                                   `${plan.months_collected || 0}/${getDurationInMonths(plan.duration)} months`
                                 ) : (
                                   <>
-                                    First Collection: {plan.first_collection_made ? '✓' : '✗'}<br/>
+                                    First Collection: {plan.first_collection_made ? '✓' : '✗'}<br />
                                     Final Collection: {plan.final_collection_made ? '✓' : '✗'}
                                   </>
                                 )
@@ -2668,21 +2659,20 @@ const handleWithdrawalAction = async (withdrawalId, action) => {
                         <tr key={withdrawal.id}>
                           <td>{new Date(withdrawal.created_at).toLocaleDateString()}</td>
                           <td>
-                            <strong>{withdrawal.username}</strong><br/>
-                            <small className="text-muted">{withdrawal.email}</small>
+                            <strong>{withdrawal.username}</strong><br />
+                            <small className="text-white">{withdrawal.email}</small>
                           </td>
                           <td>₹{withdrawal.amount.toFixed(2)}</td>
                           <td>
-                            <strong>{withdrawal.bank_name}</strong><br/>
-                            <small>A/C: {withdrawal.account_number}</small><br/>
-                            <small>IFSC: {withdrawal.ifsc_code}</small><br/>
+                            <strong>{withdrawal.bank_name}</strong><br />
+                            <small>A/C: {withdrawal.account_number}</small><br />
+                            <small>IFSC: {withdrawal.ifsc_code}</small><br />
                             <small>Name: {withdrawal.account_holder_name}</small>
                           </td>
                           <td>
-                            <span className={`badge bg-${
-                              withdrawal.status === 'pending' ? 'warning' :
+                            <span className={`badge bg-${withdrawal.status === 'pending' ? 'warning' :
                               withdrawal.status === 'approved' ? 'success' : 'danger'
-                            }`}>
+                              }`}>
                               {withdrawal.status.toUpperCase()}
                             </span>
                           </td>
@@ -2722,10 +2712,10 @@ const getDurationInMonths = (duration) => {
   if (!duration) return 0;
   const match = duration.match(/(\d+)\s+(Month|Months|Year|Years)/i);
   if (!match) return 0;
-  
+
   const amount = parseInt(match[1]);
   const unit = match[2].toLowerCase();
-  
+
   if (unit.includes('year')) return amount * 12;
   if (unit.includes('month')) return amount;
   return 0;
