@@ -4195,6 +4195,35 @@ db.query(createUsersTable, (err) => {
   }
 });
 
+// Add real_price column to all plan tables
+const alterPlanTablesForRealPrice = [
+  `ALTER TABLE algo_software_plans 
+   ADD COLUMN IF NOT EXISTS real_price DECIMAL(10, 2) DEFAULT NULL`,
+   
+  `ALTER TABLE indicator_plans 
+   ADD COLUMN IF NOT EXISTS real_price DECIMAL(10, 2) DEFAULT NULL`,
+   
+  `ALTER TABLE algo_smart_investment_plans 
+   ADD COLUMN IF NOT EXISTS real_price DECIMAL(10, 2) DEFAULT NULL`
+];
+
+alterPlanTablesForRealPrice.forEach(query => {
+  db.query(query, (err) => {
+    if (err) {
+      console.error('Error adding real_price column to plan tables:', err);
+    } else {
+      // Set real_price equal to plan_price for existing records where real_price is NULL
+      const updateQuery = query.replace('ADD COLUMN IF NOT EXISTS real_price', 'UPDATE')
+                               .replace('DEFAULT NULL', 'SET real_price = plan_price WHERE real_price IS NULL');
+      db.query(updateQuery, (updateErr) => {
+        if (updateErr) {
+          console.error('Error updating real_price values:', updateErr);
+        }
+      });
+    }
+  });
+});
+
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
