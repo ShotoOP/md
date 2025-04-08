@@ -40,10 +40,10 @@ app.use(session({
 }));
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'invest'
+    host: 'sql12.freesqldatabase.com',
+    user: 'sql12771956',
+    password: 'tlh9u1jPlK',
+    database: 'sql12771956'
 });
 
 // Promisify the query method
