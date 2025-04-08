@@ -60,6 +60,76 @@ db.connect((err) => {
     }
     console.log('Connected to the database');
     
+    // Fix plan tables primary keys and structure
+    const fixPlanTablesQueries = [
+        `DROP TABLE IF EXISTS algo_software_plans`,
+        `DROP TABLE IF EXISTS indicator_plans`,
+        `DROP TABLE IF EXISTS algo_smart_investment_plans`,
+        `CREATE TABLE algo_software_plans (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            plan_name VARCHAR(255) NOT NULL,
+            plan_price DECIMAL(10, 2) NOT NULL,
+            real_price DECIMAL(10, 2),
+            duration VARCHAR(50),
+            payment_id VARCHAR(255),
+            order_id VARCHAR(255),
+            purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            is_collected BOOLEAN DEFAULT FALSE,
+            is_upgraded BOOLEAN DEFAULT FALSE,
+            upgraded_from INT,
+            upgraded_to INT,
+            previous_duration VARCHAR(50),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )`,
+        `CREATE TABLE indicator_plans (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            plan_name VARCHAR(255) NOT NULL,
+            plan_price DECIMAL(10, 2) NOT NULL,
+            real_price DECIMAL(10, 2),
+            duration VARCHAR(50),
+            payment_id VARCHAR(255),
+            order_id VARCHAR(255),
+            purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            is_collected BOOLEAN DEFAULT FALSE,
+            is_upgraded BOOLEAN DEFAULT FALSE,
+            upgraded_from INT,
+            upgraded_to INT,
+            previous_duration VARCHAR(50),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )`,
+        `CREATE TABLE algo_smart_investment_plans (
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            plan_name VARCHAR(255) NOT NULL,
+            plan_price DECIMAL(10, 2) NOT NULL,
+            real_price DECIMAL(10, 2),
+            duration VARCHAR(50),
+            payment_id VARCHAR(255),
+            order_id VARCHAR(255),
+            purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            is_collected BOOLEAN DEFAULT FALSE,
+            subcategory VARCHAR(255),
+            first_collection_made BOOLEAN DEFAULT FALSE,
+            final_collection_made BOOLEAN DEFAULT FALSE,
+            first_collection_date TIMESTAMP NULL,
+            final_collection_date TIMESTAMP NULL,
+            months_collected INT DEFAULT 0,
+            last_collection_date TIMESTAMP NULL,
+            total_collected_amount DECIMAL(10, 2) DEFAULT 0,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )`
+    ];
+
+    fixPlanTablesQueries.forEach(query => {
+        db.query(query, (err) => {
+            if (err) {
+                console.error('Error executing plan table query:', err);
+            }
+        });
+    });
+    
     // Create tables if they don't exist
     const createTablesQueries = [
         `CREATE TABLE IF NOT EXISTS algo_software_plans (
