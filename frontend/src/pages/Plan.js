@@ -27,9 +27,13 @@ function Plan() {
     const fetchPlans = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "https://md-url.onrender.com/api/plan-configurations"
-        );
+        const token = localStorage.getItem('authToken');
+        const baseURL = process.env.REACT_APP_API_URL || "https://md-url.onrender.com";
+        const response = await axios.get(`${baseURL}/api/plan-configurations`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         console.log("Plans fetched successfully:", response.data);
         setPlans(response.data);
         setError(null);

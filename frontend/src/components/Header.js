@@ -15,8 +15,11 @@ function Header() {
   useEffect(() => {
     const checkAdminStatus = async () => {
       try {
-        await axios.get("https://md-url.onrender.com/admin/stats", {
-          withCredentials: true,
+        const token = localStorage.getItem('authToken');
+        await axios.get(`${process.env.REACT_APP_API_URL || "https://md-url.onrender.com"}/admin/stats`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         });
         setIsAdmin(true);
       } catch (err) {
