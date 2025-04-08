@@ -151,13 +151,13 @@ function Login() {
             borderRadius: "10px",
           }}
         >
-          <h3 className="text-center mb-2" style={{ color: "#FFD700" }}>
+          <h3 className="text-center mb-3" style={{ color: "#FFD700" }}>
             MindStocs
           </h3>
 
           <form onSubmit={handleSubmit}>
             {/* Email Field */}
-            <div className="mb-2">
+            <div className="mb-3">
               <label className="form-label" style={{ color: "#FFD700" }}>
                 Email
               </label>
@@ -177,7 +177,7 @@ function Login() {
             </div>
 
             {/* Password Field */}
-            <div className="mb-2">
+            <div className="mb-3">
               <label className="form-label" style={{ color: "#FFD700" }}>
                 Password
               </label>
@@ -213,7 +213,7 @@ function Login() {
             </div>
 
             {/* Remember Me Checkbox */}
-            <div className="mb-2 form-check">
+            <div className="mb-3 form-check">
               <input
                 type="checkbox"
                 className="form-check-input custom-checkbox"
@@ -269,7 +269,7 @@ function Login() {
           {/* Social Login Buttons */}
           <button
             onClick={handleGoogleSignIn}
-            className="btn w-100 mb-2 custom-button"
+            className="btn w-100 mb-3 custom-button"
             disabled={loading}
           >
             <i className="bi bi-google me-2"></i> Login with Google

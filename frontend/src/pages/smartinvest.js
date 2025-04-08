@@ -46,7 +46,7 @@ function SmartInvestmentForm() {
       };
 
       await axios.post(
-        "https://md-1-ga1n.onrender.com/api/smartinvest-forms",
+        "https://md-url.onrender.com/api/smartinvest-forms",
         formDataWithUser,
         { withCredentials: true }
       );

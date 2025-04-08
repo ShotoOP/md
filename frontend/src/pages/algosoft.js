@@ -68,7 +68,7 @@ function CustomerInformationForm() {
       
       // Update backend about phone verification
       await axios.post(
-        "https://md-1-ga1n.onrender.com/api/verify-phone",
+        "https://md-url.onrender.com/api/verify-phone",
         { phoneNumber: formData.contactNumber },
         { withCredentials: true }
       );
@@ -115,7 +115,7 @@ function CustomerInformationForm() {
       };
 
       await axios.post(
-        "https://md-1-ga1n.onrender.com/api/algosoft-forms",
+        "https://md-url.onrender.com/api/algosoft-forms",
         formDataWithUser,
         { withCredentials: true }
       );

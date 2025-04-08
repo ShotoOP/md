@@ -145,14 +145,14 @@ function Register() {
             borderRadius: "10px",
           }}
         >
-          <h3 className="text-centermb-2" style={{ color: "#FFD700" }}>
+          <h3 className="text-centermb-3" style={{ color: "#FFD700" }}>
             Create Account
           </h3>
 
           {!registrationSuccess ? (
             <form onSubmit={handleSubmit}>
               {/* Full Name Field */}
-              <div className="mb-2">
+              <div className="mb-3">
                 <label className="form-label" style={{ color: "#FFD700" }}>
                   Full Name
                 </label>
@@ -173,7 +173,7 @@ function Register() {
               </div>
 
               {/* Email Field */}
-              <div className="mb-2">
+              <div className="mb-3">
                 <label className="form-label" style={{ color: "#FFD700" }}>
                   Email
                 </label>
@@ -194,7 +194,7 @@ function Register() {
               </div>
 
               {/* Password Field */}
-              <div className="mb-2">
+              <div className="mb-3">
                 <label className="form-label" style={{ color: "#FFD700" }}>
                   Password
                 </label>
@@ -231,7 +231,7 @@ function Register() {
               </div>
 
               {/* Confirm Password Field */}
-              <div className="mb-2">
+              <div className="mb-3">
                 <label className="form-label" style={{ color: "#FFD700" }}>
                   Confirm Password
                 </label>
@@ -252,7 +252,7 @@ function Register() {
               </div>
 
               {/* Terms & Conditions Checkbox */}
-              <div className="mb-2 form-check">
+              <div className="mb-3 form-check">
                 <input
                   type="checkbox"
                   className="form-check-input custom-checkbox"
@@ -324,7 +324,7 @@ function Register() {
           {/* Social Login Buttons */}
           <button
             onClick={handleGoogleSignIn}
-            className="btn w-100 mb-2 custom-button"
+            className="btn w-100 mb-3 custom-button"
             style={{ backgroundColor: "#DB4437", color: "#fff" }}
             disabled={loading}
           >

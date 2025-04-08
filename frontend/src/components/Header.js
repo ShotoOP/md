@@ -15,7 +15,7 @@ function Header() {
   useEffect(() => {
     const checkAdminStatus = async () => {
       try {
-        await axios.get("https://md-1-ga1n.onrender.com/admin/stats", {
+        await axios.get("https://md-url.onrender.com/admin/stats", {
           withCredentials: true,
         });
         setIsAdmin(true);
@@ -29,7 +29,7 @@ function Header() {
   const handleAdminLogout = async () => {
     try {
       await axios.post(
-        "https://md-1-ga1n.onrender.com/admin/logout",
+        "https://md-url.onrender.com/admin/logout",
         {},
         { withCredentials: true }
       );
@@ -90,14 +90,14 @@ function Header() {
             </Link>
           </li>
           <li className="nav-item dropdown mx-1">
-            <button
-              className="btn btn-link nav-link dropdown-toggle fw-bold py-2"
+            <Link
+              className="nav-link dropdown-toggle fw-bold py-2"
               id="servicesDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
               Services
-            </button>
+            </Link>
             <ul className="dropdown-menu" aria-labelledby="servicesDropdown">
               <li>
                 <Link
@@ -131,7 +131,7 @@ function Header() {
           <li className="nav-item mx-1">
             <Link
               className="nav-link fw-bold py-2"
-              to="/contact"
+              to="/contact-us" // Updated route
               onClick={closeNavMenu}
             >
               Contact Us

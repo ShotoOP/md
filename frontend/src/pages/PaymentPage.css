@@ -159,3 +159,39 @@
 .text-decoration-line-through {
   text-decoration: line-through;
 }
+
+.input-group input {
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.input-group .btn-outline-warning {
+  transition: all 0.3s ease;
+}
+
+.input-group .btn-outline-warning:hover {
+  background-color: #ffd700;
+  color: #000;
+  transform: scale(1.05);
+}
+
+.form-check-input {
+  transition: all 0.3s ease;
+}
+
+.form-check-input:checked {
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}

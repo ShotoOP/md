@@ -73,7 +73,7 @@ const PaymentPage = () => {
     const fetchPlanDetails = async () => {
       try {
         console.log("Fetching plan details for planId:", planData.planId); // Debug log
-        const response = await axios.get(`https://md-1-ga1n.onrender.com/api/plan-configurations/${planData.planId}`);
+        const response = await axios.get(`https://md-url.onrender.com/api/plan-configurations/${planData.planId}`);
         const planConfig = response.data;
 
         if (!planConfig || !planConfig.duration) {
@@ -149,7 +149,7 @@ const PaymentPage = () => {
 
   const fetchWalletBalance = async () => {
     try {
-      const response = await axios.get("https://md-1-ga1n.onrender.com/api/user/wallet", { withCredentials: true });
+      const response = await axios.get("https://md-url.onrender.com/api/user/wallet", { withCredentials: true });
       setWalletBalance(response.data.wallet_balance);
     } catch (err) {
       console.error("Error fetching wallet balance:", err);
@@ -168,7 +168,7 @@ const PaymentPage = () => {
       setPromoCodeMessage(null);
 
       const response = await axios.post(
-        "https://md-1-ga1n.onrender.com/validate-promo-code",
+        "https://md-url.onrender.com/validate-promo-code",
         {
           code: promoCode,
           planType: planData.planType,
@@ -228,7 +228,7 @@ const PaymentPage = () => {
       const token = localStorage.getItem('authToken');
       
       const response = await axios.post(
-        "https://md-1-ga1n.onrender.com/validate-duration-promo",
+        "https://md-url.onrender.com/validate-duration-promo",
         {
           code: durationPromoCode,
           subcategory: planData.subcategory
@@ -296,7 +296,7 @@ const PaymentPage = () => {
 
       // Create order with proper headers and amount in paise
       const orderResponse = await axios.post(
-        "https://md-1-ga1n.onrender.com/create-order",
+        "https://md-url.onrender.com/create-order",
         {
           amount: amountInPaise, // Send amount in paise
           currency: "INR",
@@ -336,7 +336,7 @@ const PaymentPage = () => {
           try {
             console.log('Payment successful, verifying...', response);
             const verifyResponse = await axios.post(
-              "https://md-1-ga1n.onrender.com/verify-payment",
+              "https://md-url.onrender.com/verify-payment",
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -605,14 +605,14 @@ const PaymentPage = () => {
   };
 
   return (
-    <div className="home">
+    <div>
       <Header />
       {error && (
         <div className="alert alert-danger" role="alert">
           {error}
         </div>
       )}
-      <div className="bg-dark text-secondary px-4 py-5 text-center payment-container">
+      <div className="text-secondary px-4 py-5 text-center payment-container">
         <div className="py-5">
           <h1 className="display-5 fw-bold text-white mb-4">
             {paymentSuccess ? "Payment Successful!" : "Confirm Your Purchase"}
@@ -622,7 +622,7 @@ const PaymentPage = () => {
           <div className="receipt-container mx-auto">
             <div className="receipt-header">
               <div className="company-info">
-                <h2>MindStocs</h2>
+              <h2><strong>MindStocs</strong></h2>
                 <p>Your Trusted Investment Partner</p>
               </div>
               <div className="receipt-info">
@@ -642,7 +642,7 @@ const PaymentPage = () => {
 
             <div className="receipt-body">
               <div className="customer-info">
-                <h3>Customer Details</h3>
+                <h3 className="text-start">Customer Details</h3>
                 <p>
                   <strong>Name:</strong> {user?.displayName || "User"}
                 </p>
@@ -654,7 +654,7 @@ const PaymentPage = () => {
               {/* Add promo code input field */}
               {!paymentSuccess && (
                 <div className="promo-code-section mb-4">
-                  <h3>Promo Code</h3>
+                  <h3 className="text-start">Promo Code</h3>
                   <div className="input-group">
                     <input
                       type="text"
@@ -696,7 +696,7 @@ const PaymentPage = () => {
 
               {/* Wallet Balance Section */}
               <div className="wallet-section mb-4">
-                <h3>Wallet Balance</h3>
+                <h3 className="text-start">Wallet Balance</h3>
                 <p>₹{walletBalance.toFixed(2)}</p>
                 <div className="form-check">
                   <input
@@ -731,7 +731,7 @@ const PaymentPage = () => {
                 </div>
               ) : (
                 <div className="payment-actions">
-                  <p className="terms">
+                  <p className="terms text-warning">
                     By proceeding with payment, you agree to our Terms of
                     Service and Privacy Policy.
                   </p>
