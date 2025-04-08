@@ -4164,6 +4164,37 @@ app.post('/validate-duration-promo', isAuthenticated, async (req, res) => {
   }
 });
 
+const createUsersTable = `
+CREATE TABLE IF NOT EXISTS users (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(16) NOT NULL,
+  password VARCHAR(8) NOT NULL,
+  email VARCHAR(25) NOT NULL,
+  email_verified TINYINT(1) DEFAULT 0,
+  verification_token VARCHAR(100) DEFAULT NULL,
+  verification_token_expires TIMESTAMP NULL DEFAULT NULL,
+  firebase_uid VARCHAR(128) DEFAULT NULL,
+  provider VARCHAR(50) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  referral_code VARCHAR(20) DEFAULT NULL,
+  referrer_id INT(11) DEFAULT NULL,
+  has_password TINYINT(1) DEFAULT 0,
+  password_hash VARCHAR(15) NOT NULL,
+  generated_password VARCHAR(8) DEFAULT NULL,
+  phone_verified TINYINT(1) DEFAULT 0,
+  algo_trial_used TINYINT(1) DEFAULT 0,
+  indicator_trial_used TINYINT(1) DEFAULT 0,
+  FOREIGN KEY (referrer_id) REFERENCES users(id)
+)`;
+
+db.query(createUsersTable, (err) => {
+  if (err) {
+    console.error('Error creating users table:', err);
+  } else {
+    console.log('Users table created or verified successfully');
+  }
+});
+
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
