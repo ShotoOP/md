@@ -23,16 +23,16 @@ app.use(cors({
 
 // Add security headers that allow popups
 app.use((req, res, next) => {
-    // Adjust security headers to avoid blocking window.close
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    // Set COOP to unsafe-none to allow popup interactions
+    res.setHeader('Cross-Origin-Opener-Policy', 'unsafe-none');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
     next();
 });
 
 app.use(express.json());
 
 app.use(session({ 
-    secret: 'your_secret_key',
+    secret: 'mindstocs_secure_session_key_2024',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
