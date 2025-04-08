@@ -39,7 +39,7 @@ function Plan() {
           `Failed to load plans: ${err.response?.data?.error || err.message}`
         );
       } finally {
-        setLoading(false);
+        setLoading(false); 
       }
     };
 
