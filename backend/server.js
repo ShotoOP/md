@@ -23,9 +23,9 @@ app.use(cors({
 
 // Add security headers that allow popups
 app.use((req, res, next) => {
-    // Allow popups while maintaining security
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-    res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
+    // Adjust security headers to avoid blocking window.close
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
     next();
 });
 
