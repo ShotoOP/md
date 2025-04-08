@@ -97,7 +97,7 @@ function AdminDashboard() {
     const checkAdminAccess = async () => {
       try {
         setLoading(true);
-        await axios.get("https://md-url.onrender.com/admin/stats", {
+        await axios.get("https://md-1-ga1n.onrender.com/admin/stats", {
           withCredentials: true,
         });
 
@@ -125,22 +125,22 @@ function AdminDashboard() {
     try {
       const [statsRes, usersRes, purchasesRes, plansRes, promoCodesRes, withdrawalsRes] =
         await Promise.all([
-          axios.get("https://md-url.onrender.com/admin/stats", {
+          axios.get("https://md-1-ga1n.onrender.com/admin/stats", {
             withCredentials: true,
           }),
-          axios.get("https://md-url.onrender.com/admin/users", {
+          axios.get("https://md-1-ga1n.onrender.com/admin/users", {
             withCredentials: true,
           }),
-          axios.get("https://md-url.onrender.com/admin/recent-purchases", {
+          axios.get("https://md-1-ga1n.onrender.com/admin/recent-purchases", {
             withCredentials: true,
           }),
-          axios.get("https://md-url.onrender.com/api/plan-configurations", {
+          axios.get("https://md-1-ga1n.onrender.com/api/plan-configurations", {
             withCredentials: true,
           }),
-          axios.get("https://md-url.onrender.com/admin/promo-codes", {
+          axios.get("https://md-1-ga1n.onrender.com/admin/promo-codes", {
             withCredentials: true,
           }),
-          axios.get("https://md-url.onrender.com/admin/withdrawals", {
+          axios.get("https://md-1-ga1n.onrender.com/admin/withdrawals", {
             withCredentials: true,
           }),
         ]);
@@ -161,7 +161,7 @@ function AdminDashboard() {
 
   const fetchWalletBalances = async () => {
     try {
-      const response = await axios.get("https://md-url.onrender.com/admin/wallet-balances", { withCredentials: true });
+      const response = await axios.get("https://md-1-ga1n.onrender.com/admin/wallet-balances", { withCredentials: true });
       setWalletBalances(response.data);
     } catch (err) {
       console.error("Error fetching wallet balances:", err);
@@ -231,7 +231,7 @@ function AdminDashboard() {
   const handleSaveEdit = async () => {
     try {
       await axios.put(
-        `https://md-url.onrender.com/admin/plans/${editingPlan.id}`,
+        `https://md-1-ga1n.onrender.com/admin/plans/${editingPlan.id}`,
         {
           plan_name: editingPlan.plan_name,
           base_price: parseFloat(editingPlan.base_price),
@@ -253,7 +253,7 @@ function AdminDashboard() {
 
   const handleAddPlan = async () => {
     try {
-      await axios.post("https://md-url.onrender.com/admin/plans", newPlan, {
+      await axios.post("https://md-1-ga1n.onrender.com/admin/plans", newPlan, {
         withCredentials: true,
       });
 
@@ -284,7 +284,7 @@ function AdminDashboard() {
   const handleDeletePlan = async (id) => {
     if (window.confirm("Are you sure you want to delete this plan?")) {
       try {
-        await axios.delete(`https://md-url.onrender.com/admin/plans/${id}`, {
+        await axios.delete(`https://md-1-ga1n.onrender.com/admin/plans/${id}`, {
           withCredentials: true,
         });
 
@@ -300,7 +300,7 @@ function AdminDashboard() {
   const handleAddPromoCode = async () => {
     try {
       await axios.post(
-        "https://md-url.onrender.com/admin/promo-codes",
+        "https://md-1-ga1n.onrender.com/admin/promo-codes",
         newPromoCode,
         {
           withCredentials: true,
@@ -359,7 +359,7 @@ function AdminDashboard() {
   const handleSavePromoCodeEdit = async () => {
     try {
       await axios.put(
-        `https://md-url.onrender.com/admin/promo-codes/${editingPromoCode.id}`,
+        `https://md-1-ga1n.onrender.com/admin/promo-codes/${editingPromoCode.id}`,
         editingPromoCode,
         {
           withCredentials: true,
@@ -379,7 +379,7 @@ function AdminDashboard() {
   const handleDeletePromoCode = async (id) => {
     if (window.confirm("Are you sure you want to delete this promo code?")) {
       try {
-        await axios.delete(`https://md-url.onrender.com/admin/promo-codes/${id}`, {
+        await axios.delete(`https://md-1-ga1n.onrender.com/admin/promo-codes/${id}`, {
           withCredentials: true,
         });
 
@@ -396,7 +396,7 @@ function AdminDashboard() {
   const handleTogglePromoCodeStatus = async (promoCode) => {
     try {
       await axios.put(
-        `https://md-url.onrender.com/admin/promo-codes/${promoCode.id}`,
+        `https://md-1-ga1n.onrender.com/admin/promo-codes/${promoCode.id}`,
         {
           ...promoCode,
           is_active: !promoCode.is_active,
@@ -450,7 +450,7 @@ function AdminDashboard() {
   const handleUpdatePlanStatus = async (planId, planType) => {
     try {
       const response = await axios.post(
-        `https://md-url.onrender.com/admin/collect-plan/${planId}`,
+        `https://md-1-ga1n.onrender.com/admin/collect-plan/${planId}`,
         { planType },
         { withCredentials: true }
       );
@@ -493,7 +493,7 @@ function AdminDashboard() {
       }
 
       const response = await axios.post(
-        `https://md-url.onrender.com/admin/plans/${planId}/collect`,
+        `https://md-1-ga1n.onrender.com/admin/plans/${planId}/collect`,
         { planType },
         { withCredentials: true }
       );
@@ -516,8 +516,8 @@ function AdminDashboard() {
 
     try {
       const endpoint = isEditing
-        ? `https://md-url.onrender.com/admin/duration-promo-codes/${durationPromoForm.id}`
-        : 'https://md-url.onrender.com/admin/duration-promo-codes';
+        ? `https://md-1-ga1n.onrender.com/admin/duration-promo-codes/${durationPromoForm.id}`
+        : 'https://md-1-ga1n.onrender.com/admin/duration-promo-codes';
 
       const method = isEditing ? 'put' : 'post';
 
@@ -578,7 +578,7 @@ function AdminDashboard() {
   const fetchDurationPromos = async () => {
     try {
       console.log('Fetching duration promo codes...');
-      const response = await axios.get('https://md-url.onrender.com/admin/duration-promo-codes', {
+      const response = await axios.get('https://md-1-ga1n.onrender.com/admin/duration-promo-codes', {
         withCredentials: true
       });
 
@@ -608,7 +608,7 @@ function AdminDashboard() {
     }
 
     try {
-      await axios.delete(`https://md-url.onrender.com/admin/duration-promo-codes/${promoId}`, {
+      await axios.delete(`https://md-1-ga1n.onrender.com/admin/duration-promo-codes/${promoId}`, {
         withCredentials: true
       });
 
@@ -623,7 +623,7 @@ function AdminDashboard() {
   const handleToggleDurationPromoStatus = async (promoId) => {
     try {
       const response = await axios.put(
-        `https://md-url.onrender.com/admin/duration-promo-codes/${promoId}/toggle-status`,
+        `https://md-1-ga1n.onrender.com/admin/duration-promo-codes/${promoId}/toggle-status`,
         {},
         { withCredentials: true }
       );
@@ -966,7 +966,7 @@ function AdminDashboard() {
                     onClick={async () => {
                       try {
                         await axios.post(
-                          "https://md-url.onrender.com/admin/logout",
+                          "https://md-1-ga1n.onrender.com/admin/logout",
                           {},
                           { withCredentials: true }
                         );

@@ -29,7 +29,7 @@ function Header() {
   const handleAdminLogout = async () => {
     try {
       await axios.post(
-        "https://md-url.onrender.com/admin/logout",
+        "https://md-1-ga1n.onrender.com/admin/logout",
         {},
         { withCredentials: true }
       );

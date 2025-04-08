@@ -73,7 +73,7 @@ const PaymentPage = () => {
     const fetchPlanDetails = async () => {
       try {
         console.log("Fetching plan details for planId:", planData.planId); // Debug log
-        const response = await axios.get(`https://md-url.onrender.com/api/plan-configurations/${planData.planId}`);
+        const response = await axios.get(`https://md-1-ga1n.onrender.com/api/plan-configurations/${planData.planId}`);
         const planConfig = response.data;
 
         if (!planConfig || !planConfig.duration) {
@@ -149,7 +149,7 @@ const PaymentPage = () => {
 
   const fetchWalletBalance = async () => {
     try {
-      const response = await axios.get("https://md-url.onrender.com/api/user/wallet", { withCredentials: true });
+      const response = await axios.get("https://md-1-ga1n.onrender.com/api/user/wallet", { withCredentials: true });
       setWalletBalance(response.data.wallet_balance);
     } catch (err) {
       console.error("Error fetching wallet balance:", err);
@@ -168,7 +168,7 @@ const PaymentPage = () => {
       setPromoCodeMessage(null);
 
       const response = await axios.post(
-        "https://md-url.onrender.com/validate-promo-code",
+        "https://md-1-ga1n.onrender.com/validate-promo-code",
         {
           code: promoCode,
           planType: planData.planType,
@@ -228,7 +228,7 @@ const PaymentPage = () => {
       const token = localStorage.getItem('authToken');
       
       const response = await axios.post(
-        "https://md-url.onrender.com/validate-duration-promo",
+        "https://md-1-ga1n.onrender.com/validate-duration-promo",
         {
           code: durationPromoCode,
           subcategory: planData.subcategory
@@ -296,7 +296,7 @@ const PaymentPage = () => {
 
       // Create order with proper headers and amount in paise
       const orderResponse = await axios.post(
-        "https://md-url.onrender.com/create-order",
+        "https://md-1-ga1n.onrender.com/create-order",
         {
           amount: amountInPaise, // Send amount in paise
           currency: "INR",
@@ -336,7 +336,7 @@ const PaymentPage = () => {
           try {
             console.log('Payment successful, verifying...', response);
             const verifyResponse = await axios.post(
-              "https://md-url.onrender.com/verify-payment",
+              "https://md-1-ga1n.onrender.com/verify-payment",
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
