@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import { useAuth, api } from "../context/AuthContext";  // Add this import
 import { useNavigate } from "react-router-dom";
 
 const durationMultipliers = {
@@ -27,13 +27,7 @@ function Plan() {
     const fetchPlans = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem('authToken');
-        const baseURL = process.env.REACT_APP_API_URL || "https://md-url.onrender.com";
-        const response = await axios.get(`${baseURL}/api/plan-configurations`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const response = await api.get('/api/plan-configurations');
         console.log("Plans fetched successfully:", response.data);
         setPlans(response.data);
         setError(null);
@@ -42,6 +36,7 @@ function Plan() {
         setError(
           `Failed to load plans: ${err.response?.data?.error || err.message}`
         );
+        setPlans([]); // Set empty array on error
       } finally {
         setLoading(false);
       }
